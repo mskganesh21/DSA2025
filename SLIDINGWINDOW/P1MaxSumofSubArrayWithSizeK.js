@@ -10,7 +10,10 @@ QUESTION:
 given an array and a window size k return the max sum
 of window size k with consecutive elements
 */
-
+/*
+for constant window sums. take l and r initially from 0 and l+k-1 respectively.then find the sum
+run a while loop and move the window till the last and update the max
+*/
 let arr = [-1,2,3,3,4,5,-1];
 let k = 4;
 
