@@ -33,3 +33,40 @@ const FruitIntoBaskets = (arr) => {
 
 const arr = [3,3,3,1,2,1,1,2,3,3,4];
 console.log(FruitIntoBaskets(arr));  // Should output 5 (the max length)
+
+
+
+/*
+SLIDING WINDOW
+*/
+const FruitIntoBaskets1 = (arr) => {
+  let n = arr.length;
+  let maxLength = 0;
+  let l = 0;
+  let r = 0;
+  let map = {};  // moved outside so it persists between iterations
+
+  while (r < n) {
+    let num = arr[r];
+    // Add or update count of fruit at r
+    map[num] = (map[num] || 0) + 1;
+
+    // If more than 2 types, shrink window from left
+    while (Object.keys(map).length > 2) {
+      let leftNum = arr[l];
+      map[leftNum]--;
+      if (map[leftNum] === 0) {
+        delete map[leftNum];
+      }
+      l++;
+    }
+
+    // Update maxLength
+    maxLength = Math.max(maxLength, r - l + 1);
+    r++;
+  }
+
+  return maxLength;
+};
+
+console.log(FruitIntoBaskets1(arr));  // Outputs 5
